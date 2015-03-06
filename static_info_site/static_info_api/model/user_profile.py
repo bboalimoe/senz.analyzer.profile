@@ -38,13 +38,13 @@ class UserProfile(AVObject):
 
     # PUBLIC METHOD
     def updateUserInfo(self, **data):
-        update_data = {"objectId": self.objectId}
+        update_data = {}
         for key, value in data.iteritems():
             update_data[key] = value
-        print update_data
         # Update the data in Database
-        self.update_all(update_data)
+        return self.update(str(self.objectId), update_data).content
 
 if __name__ == "__main__":
 
     m = UserProfile("54d82fefe4b0d414801050ee")
+    print m.updateUserInfo(age=19, gender=1)
