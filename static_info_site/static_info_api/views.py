@@ -24,6 +24,11 @@ def successResponses(results):
 
 @csrf_exempt
 def StaticInfo(request):
-    pass
+    if request.method == 'POST':
+        body = json.loads(request.body)  #body is deprecated
+    else:
+        return errorResponses("Error!")
+
+    successResponses("Ok!")
 
 
