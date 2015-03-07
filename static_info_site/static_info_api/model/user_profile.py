@@ -5,7 +5,7 @@ class UserProfile(AVObject):
     def __init__(self, user_id):
         self.userId = user_id
         user_info = self._getUserInfoByUserId()
-        self.objectId     = user_info["objectId"]
+        self.objectId     = str(user_info["objectId"])
         self.age          = user_info["age"]
         self.hasParent    = user_info["hasParent"]
         self.curious      = user_info["curious"]
@@ -42,7 +42,7 @@ class UserProfile(AVObject):
         for key, value in data.iteritems():
             update_data[key] = value
         # Update the data in Database
-        return self.update(str(self.objectId), update_data).content
+        return self.update(self.objectId, update_data).content
 
 if __name__ == "__main__":
 
