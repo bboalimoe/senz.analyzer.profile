@@ -6,6 +6,10 @@ from nbcLib.nbc import NBC
 
 class Learner(NBC):
 
+    HYPOTHESIS_LIST = {
+        "age": {"0": "10-18", "19": "19-26", "27": "27-35"}
+    }
+
     def __init__(self, device_mac, hypothesis_type):
         app_set     = AppTable()
         device_all  = UserDeviceInfo()
@@ -16,7 +20,38 @@ class Learner(NBC):
         self.caseValueList  = device_all.generateTrainCase(app_set.appPackageName)
         self.caseUserIdList = device_all.userId
 
+        self.case = self._generateCase(
+            app_set,
+            device_all,
+            hypothesis_type
+        )
+
+        print self.case
 
 
-    
+
+    def _generateCase(self, app_set, device_info_list, hypothesis_type):
+        case = {}
+        case["item_name"] = app_set.appName
+        for index in range(0, len(device_info_list.userId)-1):
+            user = UserProfile(device_info_list.userId[index])
+            print user.userInfo[hypothesis_type]
+            case[str(index)] = {
+                "h":    self.HYPOTHESIS_LIST[hypothesis_type][str(user.userInfo[hypothesis_type])],
+                "case": device_info_list.generateTrainCase(app_set.appPackageName)[index]
+            }
+        return case
+
+
+if __name__ == "__main__":
+
+    m = Learner("866707010347352", "age")
+
+
+
+
+
+
+
+
 

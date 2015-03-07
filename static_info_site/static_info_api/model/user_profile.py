@@ -4,20 +4,20 @@ from lean_cloud.lean_obj import AVObject
 class UserProfile(AVObject):
     def __init__(self, user_id):
         self.userId = user_id
-        user_info = self._getUserInfoByUserId()
-        self.objectId     = str(user_info["objectId"])
-        self.age          = user_info["age"]
-        self.hasParent    = user_info["hasParent"]
-        self.curious      = user_info["curious"]
-        self.exercise     = user_info["exercise"]
-        self.hasPet       = user_info["hasPet"]
-        self.isPregnant   = user_info["isPregnant"]
-        self.studyAbroad  = user_info["studyAbroad"]
-        self.socialManiac = user_info["socialManiac"]
-        self.education    = user_info["education"]
-        self.gender       = user_info["gender"]
-        self.shopManiac   = user_info["shopManiac"]
-        self.isSampleData = user_info["isSampleData"]
+        self.userInfo = self._getUserInfoByUserId()
+        self.objectId = str(self.userInfo["objectId"])
+        # self.age          = user_info["age"]
+        # self.hasParent    = user_info["hasParent"]
+        # self.curious      = user_info["curious"]
+        # self.exercise     = user_info["exercise"]
+        # self.hasPet       = user_info["hasPet"]
+        # self.isPregnant   = user_info["isPregnant"]
+        # self.studyAbroad  = user_info["studyAbroad"]
+        # self.socialManiac = user_info["socialManiac"]
+        # self.education    = user_info["education"]
+        # self.gender       = user_info["gender"]
+        # self.shopManiac   = user_info["shopManiac"]
+        # self.isSampleData = user_info["isSampleData"]
 
 
 

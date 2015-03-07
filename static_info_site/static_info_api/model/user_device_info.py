@@ -9,6 +9,7 @@ class UserDeviceInfo(AVObject):
             device_info = self._getDeviceInfo()
             self.packageList = []
             self.hardware    = []
+            self.userId      = []
             for i in device_info:
                 self.packageList.append(self._decodePackageList(i["packageList"]))
                 self.hardware.append(str(i["hardware"]))
