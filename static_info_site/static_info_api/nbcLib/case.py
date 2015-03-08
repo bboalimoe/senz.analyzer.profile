@@ -6,9 +6,10 @@ import sys
 class Case:
     def __init__(self, case_file):
         # The json file's name
-        self.cFile      = case_file
+        # self.cFile      = case_file
         # The trainning case in json file
-        self.case       = self.decodeJson(case_file)
+        # self.case       = self.decodeJson(case_file)
+        self.case       = case_file
         # Some normal attributes of cases
         self.itemCount  = self.getItemCount()
         self.itemName   = self.getItemName()

@@ -21,12 +21,13 @@ class Learner(NBC):
         self.caseUserIdList = device_all.userId
 
         self.case = self._generateCase(
-            app_set,
-            device_all,
-            hypothesis_type
+            app_set,        # The universal set of app
+            device_all,     # The infomation of all devices in database
+            hypothesis_type # THe type of hypothesis that we need learn
         )
-
         print self.case
+        nbc = NBC(self.case)
+
 
 
 
@@ -35,7 +36,6 @@ class Learner(NBC):
         case["item_name"] = app_set.appName
         for index in range(0, len(device_info_list.userId)-1):
             user = UserProfile(device_info_list.userId[index])
-            print user.userInfo[hypothesis_type]
             case[str(index)] = {
                 "h":    self.HYPOTHESIS_LIST[hypothesis_type][str(user.userInfo[hypothesis_type])],
                 "case": device_info_list.generateTrainCase(app_set.appPackageName)[index]
