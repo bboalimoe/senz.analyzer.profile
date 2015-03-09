@@ -20,7 +20,6 @@ class Learner(NBC):
         device_all = UserDeviceInfo()
         self.hypothesis = hypothesis_type
 
-
         self.case = self._generateCase(
             app_set,        # The universal set of app
             device_all,     # The infomation of all devices in database
@@ -44,13 +43,16 @@ class Learner(NBC):
 
 
 
+    # PUBLIC METHOD
     def train(self, m="notInput", p="notInput"):
         # Train
         NBC.train(m, p)
-        train_value = 0
-        # The different hypothesis param in database
+        # Store in database
+        data = {
+            self.hypothesis: NBC.generateTrainResult()
+        }
         param_hypo  = UserTrainParam()
-        param_hypo.addNewTrainParam(self.hypothesis, train_value)
+        param_hypo.updateTrainParam(data)
 
 
 if __name__ == "__main__":
