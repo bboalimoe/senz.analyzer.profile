@@ -46,18 +46,18 @@ class Learner(NBC):
     # PUBLIC METHOD
     def train(self, m="notInput", p="notInput"):
         # Train
-        NBC.train(m, p)
+        NBC.train(self, m, p)
         # Store in database
-        data = {
-            self.hypothesis: NBC.generateTrainResult()
-        }
-        param_hypo  = UserTrainParam()
-        param_hypo.updateTrainParam(data)
+        # data = {self.hypothesis: NBC.generateTrainResult(self)}
+        print NBC.generateTrainResult(self)
+        param_hypo = UserTrainParam()
+        # param_hypo.updateTrainParam(data)
 
 
 if __name__ == "__main__":
 
     m = Learner("age")
+    m.train()
 
 
 

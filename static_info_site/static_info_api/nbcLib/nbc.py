@@ -240,6 +240,11 @@ class NBC:
             return False
 
     def generateTrainResult(self):
-        return 0
+        data = {
+            "hypothesis":  self.hypothesis,
+            "priorP":      self.prior_p,
+            "likelihoodP": self.likelihood
+        }
+        return data
 
 

@@ -72,7 +72,7 @@ class UserDeviceInfo(AVObject):
         elif type(self.hardware) is list:
             for package_list in self.packageList:
                 case_item = []
-                for index in range(0, len(universal_set)-1):
+                for index in range(0, len(universal_set)):
                     if package_list[index] is universal_set[index]:
                         case_item.append(1)
                     else:

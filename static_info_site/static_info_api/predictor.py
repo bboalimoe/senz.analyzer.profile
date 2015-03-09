@@ -19,7 +19,7 @@ class Predictor(NBC):
         # All user's info in database
         device_all  = UserDeviceInfo()
         # The user's trainning param
-        param_user  = UserTrainParam(self.userId)
+        param       = UserTrainParam()
 
         self.case = self._generateCase(
             app_set,        # The universal set of app
