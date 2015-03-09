@@ -42,7 +42,7 @@ class UserProfile(AVObject):
         for key, value in data.iteritems():
             update_data[key] = value
         # Update the data in Database
-        return self.update(self.objectId, update_data).content
+        self.update(self.objectId, update_data)
 
 if __name__ == "__main__":
 
