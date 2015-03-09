@@ -3,6 +3,8 @@ from lean_cloud.lean_obj import AVObject
 
 class UserTrainParam(AVObject):
 
+    TRAIN_PARAM_OBJECT_ID = "54f90793e4b0ab818dfae9c2"
+
     def __init__(self):
         pass
 
@@ -18,10 +20,10 @@ class UserTrainParam(AVObject):
 
 
 
-    def addNewTrainParam(self, hypothesis, value):
-        # Init the param
-        param = {
-            "timestamp": self.Date(), # The current time (formate: iso 8601)
-            hypothesis:  value
-        }
-        self.save(param)
+    def updateTrainParam(self, data):
+        # Create the dict of update data
+        update_data = {}
+        for key, value in data.iteritems():
+            update_data[key] = value
+        # Update the data in Database
+        self.update(self.TRAIN_PARAM_OBJECT_ID, update_data)
