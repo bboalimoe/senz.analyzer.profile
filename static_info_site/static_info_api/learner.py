@@ -10,24 +10,24 @@ class Learner(NBC):
         "age": {"0": "10-18", "19": "19-26", "27": "27-35"}
     }
 
-    def __init__(self, device_mac, hypothesis_type):
-        app_set     = AppTable()
-        device_all  = UserDeviceInfo()
-        device_user = UserDeviceInfo(device_mac)
+    def __init__(self, hypothesis_type):
+        # The user's device infomation
+        # device_user = UserDeviceInfo(device_mac)
+        # self.userId = device_user.userId
+        # All kinds of app info in database
+        app_set    = AppTable()
+        # All user's info in database
+        device_all = UserDeviceInfo()
+        self.hypothesis = hypothesis_type
 
-        self.userId    = device_user.userId
-        self.caseHypothesisType = hypothesis_type
-        self.caseValueList  = device_all.generateTrainCase(app_set.appPackageName)
-        self.caseUserIdList = device_all.userId
 
         self.case = self._generateCase(
             app_set,        # The universal set of app
             device_all,     # The infomation of all devices in database
             hypothesis_type # THe type of hypothesis that we need learn
         )
-        print self.case
-        nbc = NBC(self.case)
-
+        # print self.case
+        NBC.__init__(self, self.case)
 
 
 
@@ -43,9 +43,19 @@ class Learner(NBC):
         return case
 
 
+
+    def train(self, m="notInput", p="notInput"):
+        # Train
+        NBC.train(m, p)
+        train_value = 0
+        # The different hypothesis param in database
+        param_hypo  = UserTrainParam()
+        param_hypo.addNewTrainParam(self.hypothesis, train_value)
+
+
 if __name__ == "__main__":
 
-    m = Learner("866707010347352", "age")
+    m = Learner("age")
 
 
 
