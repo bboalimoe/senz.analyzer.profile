@@ -239,5 +239,7 @@ class NBC:
             print "If you want to avoid the underestimate, please fill all param."
             return False
 
+    def generateTrainResult(self):
+        return 0
 
 
