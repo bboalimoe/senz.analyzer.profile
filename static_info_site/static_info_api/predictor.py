@@ -56,9 +56,9 @@ class Predictor(NBC):
             hypothesis_type: int(self._generateUserFeature(hypothesis_type, reliability)),
             self.HYPOTHESIS_RELIABILITY_ATTRIBUTE_NAME[hypothesis_type]: reliability
         }
-        print update_data
         user_profile = UserProfile(self.userId)
         user_profile.updateUserInfo(update_data)
+        return update_data
 
 if __name__ == "__main__":
 

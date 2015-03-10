@@ -2,6 +2,8 @@ import json
 from django.http.response import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from learner import Learner
+from predictor import Predictor
 
 def errorInfo():
     import sys
@@ -23,12 +25,29 @@ def successResponses(results):
     return JsonResponse({"status": 1, "results": results})
 
 @csrf_exempt
-def StaticInfo(request):
+def Learn(request):
     if request.method == 'POST':
         body = json.loads(request.body)  #body is deprecated
     else:
         return errorResponses("Error!")
 
-    successResponses("Ok!")
+    hypothesis_type = body["hypothesisType"]
+    param_m         = body["paramM"]
+    param_p         = body["paramP"]
+    learner = Learner(hypothesis_type)
+    learner.train(param_m, param_p)
+
+    successResponses("Learning successfully!")
+
+def Predict(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)  #body is deprecated
+    else:
+        return errorResponses("Error!")
+
+    user_mac        = body["userMac"]
+    hypothesis_type = body["hypothesisType"]
+    predictor = Predictor(user_mac)
+    successResponses(predictor.predict(hypothesis_type))
 
 
