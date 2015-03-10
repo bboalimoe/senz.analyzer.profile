@@ -3,6 +3,7 @@ from model.user_device_info import UserDeviceInfo
 from model.user_profile import UserProfile
 from model.user_train_param import UserTrainParam
 from nbcLib.nbc import NBC
+import decimal
 
 class Learner(NBC):
 
@@ -18,7 +19,7 @@ class Learner(NBC):
         app_set    = AppTable()
         # All user's info in database
         device_all = UserDeviceInfo()
-        self.hypothesis = hypothesis_type
+        self.hypothesisType = hypothesis_type
 
         self.case = self._generateCase(
             app_set,        # The universal set of app
@@ -48,16 +49,21 @@ class Learner(NBC):
         # Train
         NBC.train(self, m, p)
         # Store in database
-        # data = {self.hypothesis: NBC.generateTrainResult(self)}
-        print NBC.generateTrainResult(self)
+        # print NBC.generateTrainResult(self)
+        print self.hypothesis
+        for key, value in NBC.generateTrainResult(self).iteritems():
+            print key, value
+        data = {self.hypothesisType: NBC.generateTrainResult(self)}
+
         param_hypo = UserTrainParam()
-        # param_hypo.updateTrainParam(data)
+        param_hypo.updateTrainParam(data)
 
 
 if __name__ == "__main__":
 
     m = Learner("age")
     m.train()
+
 
 
 

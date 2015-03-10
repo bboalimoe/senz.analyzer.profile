@@ -45,7 +45,7 @@ class NBC:
         #   Hi contains the item's every possible result's possibility in Hi (that is likelihood's definition)
         # - 3. Hi's structure is [li0, li1, ... lij ... lim]
         #   lij is the likelihood of items in Hi which result is j
-        self.likelihood = {}
+        self.likelihood = []
         self.trainningOverFlag = False
 
     # The prediction of new case
@@ -97,12 +97,12 @@ class NBC:
         for i in range(0, itemCount):
             hi = {}
             for h in self.hypothesis:
-                vi = {}
+                vi = []
                 for v in range(0, len(itemValue[i])):
                     l = 0
-                    vi[v] = l
+                    vi.append(l)
                 hi[h] = vi
-            self.likelihood[i] = hi
+            self.likelihood.append(hi)
 
         #start trainning ...
         print "\nThe trainning started"
@@ -151,7 +151,7 @@ class NBC:
     def priorP(self, h):
         h_count = self.tCase.getHypothesisCount(h)
         total_count = self.tCase.caseCount
-        P = decimal.Decimal(h_count) / decimal.Decimal(total_count)
+        P = float(h_count) / float(total_count)
         return P
 
     # The likelihood of D at a certain hypothesis - P(D|h)
@@ -174,7 +174,7 @@ class NBC:
             if case[itemIndex] == value:
                 countCaseItemIsValue += 1
         # The likelihood
-        P = (decimal.Decimal(countCaseItemIsValue + m * p)) / (decimal.Decimal(countCaseInHypo + m))
+        P = (float(countCaseItemIsValue + m * p)) / (float(countCaseInHypo + m))
         return P
 
     # Check the unclassified case's rule
@@ -246,5 +246,7 @@ class NBC:
             "likelihoodP": self.likelihood
         }
         return data
+
+
 
 

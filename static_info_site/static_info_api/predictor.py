@@ -13,7 +13,6 @@ class Predictor(NBC):
     def __init__(self, device_mac, hypothesis_type):
         # The user's device infomation
         device_user = UserDeviceInfo(device_mac)
-        self.userId = device_user.userId
         # All kinds of app info in database
         app_set     = AppTable()
         # All user's info in database
@@ -21,10 +20,14 @@ class Predictor(NBC):
         # The user's trainning param
         param       = UserTrainParam()
 
-        self.case = self._generateCase(
-            app_set,        # The universal set of app
-            device_all,     # The infomation of all devices in database
-            hypothesis_type # THe type of hypothesis that we need learn
-        )
+        self.userId = device_user.userId
+        self.param = param.getParamInfoByHypothesis(hypothesis_type)
+
+        print self.param
+
         # print self.case
-        NBC.__init__(self, self.case)
+        # NBC.__init__(self, self.case)
+
+if __name__ == "__main__":
+
+    m = Predictor("869012012581612", "age")
