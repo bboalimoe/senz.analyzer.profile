@@ -63,8 +63,8 @@ class UserDeviceInfo(AVObject):
         case = []
         # If there is only one user device
         if type(self.hardware) is str:
-            for index in range(0, len(universal_set)):
-                if self.packageList[index] is universal_set[index]:
+            for package_in_uni in universal_set:
+                if package_in_uni in self.packageList:
                     case.append(1)
                 else:
                     case.append(0)
@@ -77,12 +77,6 @@ class UserDeviceInfo(AVObject):
                         case_item.append(1)
                     else:
                         case_item.append(0)
-                    # for package_in_dev in package_list:
-                    #     if package_in_dev is package_in_uni:
-                    #         case_item.append(1)
-                    #         break
-                    #     else:
-                    #         case_item.append(0)
                 case.append(case_item)
         return case
 

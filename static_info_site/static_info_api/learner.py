@@ -7,10 +7,6 @@ import decimal
 
 class Learner(NBC):
 
-    HYPOTHESIS_LIST = {
-        "age": {"0": "10-18", "19": "19-26", "27": "27-35"}
-    }
-
     def __init__(self, hypothesis_type):
         # The user's device infomation
         # device_user = UserDeviceInfo(device_mac)
@@ -50,9 +46,6 @@ class Learner(NBC):
         NBC.train(self, m, p)
         # Store in database
         # print NBC.generateTrainResult(self)
-        print self.hypothesis
-        for key, value in NBC.generateTrainResult(self).iteritems():
-            print key, value
         data = {self.hypothesisType: NBC.generateTrainResult(self)}
 
         param_hypo = UserTrainParam()

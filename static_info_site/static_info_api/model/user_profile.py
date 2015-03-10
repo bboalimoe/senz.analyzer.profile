@@ -37,14 +37,14 @@ class UserProfile(AVObject):
 
 
     # PUBLIC METHOD
-    def updateUserInfo(self, **data):
-        update_data = {}
-        for key, value in data.iteritems():
-            update_data[key] = value
+    def updateUserInfo(self, data):
+        # update_data = {}
+        # for key, value in data.iteritems():
+        #     update_data[key] = value
         # Update the data in Database
-        self.update(self.objectId, update_data)
+        self.update(self.objectId, data)
 
 if __name__ == "__main__":
 
     m = UserProfile("54d82fefe4b0d414801050ee")
-    print m.updateUserInfo(age=19, gender=1)
+    # print m.updateUserInfo(age=19, gender=1)

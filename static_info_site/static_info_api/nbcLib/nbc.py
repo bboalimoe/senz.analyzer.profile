@@ -15,27 +15,33 @@ import decimal
 #       - P'(female|D) = P(female|D) / ( P(male|D) + P(female|D) )
 
 class NBC:
-    def __init__(self, train_file):
-        # Get trainning cases from json file.
-        self.tCase = case.Case(train_file)
-        self.tCase.printCaseInfo()
-        # The list of hypothesis
-        # It's a list.
-        self.hypothesis = self.tCase.hypothesis
-        # It's the size of equivalent sample, it's used to avoid underestimate
-        self.equivalentSample = []
-        # It's the item's prior probability at different hypothesis, it's used to avoid underestimate
-        self.priorProbabiltyOfItem = []
-        # Init the size of equivalent sample and the item's prior probability at different hypothesis
-        for i in range(0, self.tCase.itemCount):
-            self.equivalentSample.append(0)
-            for j in self.tCase.itemValue[i]:
-                count = len(self.tCase.itemValue[i])
-                p     = 1 / decimal.Decimal(count) # It's one probability of items, default is the average
-                prior = [] # It's the every probability of items
-                for x in range(0, count):
-                    prior.append(p)
-                self.priorProbabiltyOfItem.append(prior)
+
+    HYPOTHESIS_LIST = {
+        "age": {"0": "10-18", "19": "19-26", "27": "27-35"}
+    }
+
+    def __init__(self, train_file=None):
+        if train_file is not None:
+            # Get trainning cases from json file.
+            self.tCase = case.Case(train_file)
+            self.tCase.printCaseInfo()
+            # The list of hypothesis
+            # It's a list.
+            self.hypothesis = self.tCase.hypothesis
+            # It's the size of equivalent sample, it's used to avoid underestimate
+            self.equivalentSample = []
+            # It's the item's prior probability at different hypothesis, it's used to avoid underestimate
+            self.priorProbabiltyOfItem = []
+            # Init the size of equivalent sample and the item's prior probability at different hypothesis
+            for i in range(0, self.tCase.itemCount):
+                self.equivalentSample.append(0)
+                for j in self.tCase.itemValue[i]:
+                    count = len(self.tCase.itemValue[i])
+                    p     = 1 / decimal.Decimal(count) # It's one probability of items, default is the average
+                    prior = [] # It's the every probability of items
+                    for x in range(0, count):
+                        prior.append(p)
+                    self.priorProbabiltyOfItem.append(prior)
         # The prior probability of every hypothesis
         # It is a list.
         self.prior_p = {}
@@ -52,9 +58,9 @@ class NBC:
     # It's a normalization method
     def predictCase(self, D):
         # Check the trainning is over
-        if self.trainningOverFlag == False:
-            print "Please train NBC first!"
-            return "unknown"
+        # if self.trainningOverFlag == False:
+        #     print "Please train NBC first!"
+        #     return "unknown"
         #start classifying ...
         print "\nThe classifying started"
         print "======================="
@@ -64,8 +70,8 @@ class NBC:
         P = 0
 
         # Check unclassified case
-        if not self.checkUnclassifiedCase(D):
-            return "unknown"
+        # if not self.checkUnclassifiedCase(D):
+        #     return "unknown"
 
         # Calculate the Denominator
         for h in self.hypothesis:
@@ -132,7 +138,7 @@ class NBC:
                         print "|",
                 print " , ",
             print "\n"
-        self.trainningOverFlag = True
+        # self.trainningOverFlag = True
 
     # The posterior probability of hypothesis - P(h|D)( * P(D) )
     # - h is hypothesis' name
@@ -238,6 +244,11 @@ class NBC:
             print "Error! Tranning is stopped."
             print "If you want to avoid the underestimate, please fill all param."
             return False
+
+    def rebuildNBCModel(self, hypothesis, prior_p, likelihood_p):
+        self.hypothesis = hypothesis
+        self.prior_p    = prior_p
+        self.likelihood = likelihood_p
 
     def generateTrainResult(self):
         data = {
