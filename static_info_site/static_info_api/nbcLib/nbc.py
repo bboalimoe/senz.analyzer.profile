@@ -17,7 +17,25 @@ import decimal
 class NBC:
 
     HYPOTHESIS_LIST = {
-        "age": {"0": "10-18", "19": "19-26", "27": "27-35"}
+        "sexPrefer": {"1": "male", "0": "female", "-1": "uncertain"},
+        "gender": {"1": "male", "0": "female", "-1": "uncertain"},
+        "wage": {"0": "0-5K", "5": "5-10K", "10": "10-20K", "20": "above20", "-1": "uncertain"},
+        "education": {"0": "high_school", "1": "bachelor", "2": "master", "-1": "uncertain"},
+        "hasBaby": {"1": "yes", "0":"no", "-1": "uncertain"},
+        "socialManiac": {"1": "yes", "0":"no", "-1": "uncertain"},
+        "shopManiac": {"1": "yes", "0":"no", "-1": "uncertain"},
+        "curious": {"1": "yes", "0":"no", "-1": "uncertain"},
+        "age": {"0": "10-18", "19": "19-26", "27": "27-35", "36": "36-45", "45": "above", "-1": "uncertain"},
+        "isMarriage": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "hasPets": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "isPregnant": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "hasParent": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "exercise": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "studyAbroad": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "tourism": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "nonAsian": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "eastAsian": {"1": "yes", "0": "no", "-1": "uncertain"},
+        "popChinese": {"1": "yes", "0": "no", "-1": "uncertain"}
     }
 
     def __init__(self, train_file=None):

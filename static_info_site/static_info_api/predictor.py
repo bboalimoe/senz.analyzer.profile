@@ -7,7 +7,25 @@ from nbcLib.nbc import NBC
 class Predictor(NBC):
 
     HYPOTHESIS_RELIABILITY_ATTRIBUTE_NAME = {
-        "age": "ageReliability"
+        "sexPrefer": "sexPreferReliability",
+        "gender": "genderReliability",
+        "wage": "wageReliability",
+        "education": "educationReliability",
+        "hasBaby": "hasBabyReliability",
+        "socialManiac": "socialManiacReliability",
+        "shopManiac": "shopManiacReliability",
+        "curious": "curiousReliability",
+        "age": "ageReliability",
+        "isMarriage": "isMarriageReliability",
+        "hasPets": "hasPetsReliability",
+        "isPregnant": "isPregnantReliability",
+        "hasParent": "hasParentReliability",
+        "exercise": "exerciseReliability",
+        "studyAbroad": "studyAbroadReliability",
+        "tourism": "tourismReliability",
+        "nonAsian": "nonAsianReliability",
+        "eastAsian": "eastAsianReliability",
+        "popChinese": "popChineseReliability"
     }
 
     def __init__(self, device_mac):
