@@ -10,6 +10,7 @@ class UserDeviceInfo(AVObject):
             self.packageList = []
             self.hardware    = []
             self.userId      = []
+            self.userCount   = len(device_info)
             for i in device_info:
                 self.packageList.append(self._decodePackageList(i["packageList"]))
                 self.hardware.append(str(i["hardware"]))
@@ -80,6 +81,13 @@ class UserDeviceInfo(AVObject):
                 case.append(case_item)
         return case
 
+
+
+    def printUserInfo(self):
+        print "\n\n"
+        print "The exist user information: (", self.userCount, ")"
+        for i in range(0, self.userCount):
+            print " *", self.userId[i], "\tHARDWARE", self.hardware[i], "\tAPPLIST", self.packageList[i]
 
 
 if __name__ == "__main__":

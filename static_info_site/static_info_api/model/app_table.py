@@ -10,6 +10,7 @@ class AppTable(AVObject):
             self.appName        = []
             # self.appIcon        = []
             app_info = self._getAppInfo()
+            self.appCount       = len(app_info)
             for i in app_info:
                 self.appPackageName.append(str(i["appPackageName"]))
                 self.appCatagory.append(i["appCatagory"]) # appCatagory is ascii, it cannot be encode character
@@ -46,6 +47,14 @@ class AppTable(AVObject):
             # return json format result
             # print json.loads(response.content)
             return json.loads(response.content)["results"][0]
+
+
+
+    def printAppInfo(self):
+        print "\n\n"
+        print "Collected APP infomation: (", self.appCount, ")"
+        for i in range(0, self.appCount):
+            print " *", self.appName[i], ": \tTYPE", self.appCatagory[i], "\tPACKAGE", self.appPackageName[i]
 
 
 
